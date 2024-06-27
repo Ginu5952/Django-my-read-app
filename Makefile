@@ -14,7 +14,10 @@ dev-showm:
 	python3 manage.py showmigrations --settings=config.settings.dev
 
 dev-sqlm:
-	python3 manage.py sqlmigrate $(a) $(m) --settings=config.settings.dev	
+	python3 manage.py sqlmigrate $(a) $(m) --settings=config.settings.dev
+
+dev-dbshell:
+	python3 manage.py dbshell --settings=config.settings.dev 		
 
 
 
