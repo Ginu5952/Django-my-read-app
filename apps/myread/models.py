@@ -59,26 +59,26 @@ class MyRead(models.Model):
         ]
 
 
-    class StatusPercent(models.Model):
-        SP_CHOICE ={
-            "pending": "Pending",
-            "reading": "Reading",
-            "done": "Done"
-        }
-        percentage_read_range = IntegerRangeField(
-            null=True,
-            blank=True,
-            validators = [RangeMinValueValidator(0), RangeMaxValueValidator(101)]
-        )
-        read_status = models.CharField(max_length=10, choices=SP_CHOICE, default='pending')
+class StatusPercent(models.Model):
+    SP_CHOICE ={
+        "pending": "Pending",
+        "reading": "Reading",
+        "done": "Done"
+    }
+    percentage_read_range = IntegerRangeField(
+        null=True,
+        blank=True,
+        validators = [RangeMinValueValidator(0), RangeMaxValueValidator(101)]
+    )
+    read_status = models.CharField(max_length=10, choices=SP_CHOICE, default='pending')
 
-        class Meta:
-            constraints = [
-                models.CheckConstraint(
-                    name='%(app_label)s_%(class)s_read_status_check',
-                    check=models.Q(read_status__in=['pending', 'reading', 'done'])
-                )
-            ]
+    class Meta:
+        constraints = [
+            models.CheckConstraint(
+                name='%(app_label)s_%(class)s_read_status_check',
+                check=models.Q(read_status__in=['pending', 'reading', 'done'])
+            )
+        ]
 
 
 
