@@ -15,6 +15,7 @@ DEFAULT_APPS = [
 CUSTOM_APPS = [
     # USER DEFINED APPS
     "apps.reader",
+    "apps.book",
 ]
 THIRD_PARTY_APPS = [
     # EXTERNAL APPS
