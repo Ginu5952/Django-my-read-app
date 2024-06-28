@@ -80,6 +80,9 @@ class StatusPercent(models.Model):
             )
         ]
 
+    def __str__(self) -> str: # no need migration
+        return f'{self.percentage_read_range}({self.read_status})' 
+
 
 
 
