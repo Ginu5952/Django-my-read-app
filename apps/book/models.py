@@ -57,5 +57,6 @@ class Book(models.Model):
     edition = models.SmallIntegerField(null=True, blank=True)
     book_format = models.CharField(max_length=2, choices=BOOK_FORMAT,default='eb')
     tags = models.ManyToManyField('book.Tag', related_name='book')
+    
     def __str__(self):
         return f'{self.isbn} - {self.title}'  
