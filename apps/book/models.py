@@ -89,5 +89,5 @@ class Book(CreatedModifiedAbstract):
         return f'{self.isbn} - {self.title}'  
     
     class Meta:
-        ordering = ('title')
+        ordering = ['title']
         default_related_name = '%(app_label)s_%(model_name)s'
