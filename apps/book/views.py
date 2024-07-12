@@ -5,7 +5,8 @@ from django.http import HttpResponse
 # Create your views here.
 
 def book_detail(request,isbn):
-    book = models.Book.get(pk=isbn)
+
+    book = models.Book.objects.get(pk=isbn)
 
     response = f"""
         <html>
