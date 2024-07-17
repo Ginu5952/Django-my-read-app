@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from . import models
 from django.http import HttpResponse
 import ipdb
 from .forms import PostBookForm
+from apps.book.models import Book
 
 # Create your views here.
 
@@ -39,11 +40,27 @@ def book_post(request):
         data = request.POST
         form = PostBookForm(data)
 
-        # validation
+         # Validation
         if form.is_valid():
-            # TODO:save to database
-            # TODO:redirect to home page
-            pass
+            data = form.cleaned_data
+            # TODO: Save to database
+            book = models.Book(
+                isbn=data['isbn'],
+                title=data['title'],
+                page_count=data['pages'],
+                description=data['description'],
+                category=data['category'],
+                published_date = data['published_year'],
+                publisher=data['publisher'],
+                lang=data['language'],
+                edition=data['edition'],
+                book_format=data['book_format']
+            )
+            # save book first, to avoid `ValueError: Cannot add *: instance is on database "default", value is on database "None"`
+            book.save()
 
+            book.tags.set(data['tags'])
+            book.save()
 
-
+            #  Redirect to home page using `app-name: url-name`
+            return redirect('myread-urls:home-page')

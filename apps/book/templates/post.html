@@ -1,14 +1,15 @@
-{% extends "base.html" %} <!--inherit. Should be the first thing-->
+
 {% load static %}
 {% block title %}{{block.super}} - Post{% endblock title %}
 
 {% block stylesheet %}
     {{block.super}}
     <link rel='stylesheet' href="{% static 'css/form.css' %}" />
+    
 {% endblock stylesheet %}
 
 {% block content %}
-<h1>Share your boook</h1>
+<h1>Share your book</h1>
 <div class='post-form'>
     <form method='post'>
         {% csrf_token %}
@@ -21,7 +22,9 @@
                 value='',
                 placeholder='Enter isbn'
             />
+            {{ form.isbn }}
         </div>
+
         <div class='form-element'>
             <label for='title_input'>Title:</label>
             <input 
@@ -32,6 +35,7 @@
                 placeholder='Enter Title'
             />
         </div>
+
         <div class='form-element'>
             <label for='pages_input'>pages:</label>
             <input 
@@ -40,8 +44,10 @@
                 type='number',
                 value='',
                 placeholder='Enter pages'
+                
             />
         </div>
+
         <div class='form-element'>
             <label for='description_input'>description:</label>
             <textarea 
@@ -50,6 +56,7 @@
                 type='textarea',
                 value='',
                 placeholder='Enter description'
+                
             ></textarea>
         </div>
         <div class='form-cat'>
@@ -82,6 +89,19 @@
         
 
         </div>
+
+        <div class='form-element'>
+            <hr />
+            <label for='id_published_date'>Published Date:</label>
+            <input 
+                id='id_published_date'
+                name='published_date'
+                type='number'
+                placeholder='Enter Published Date'
+                
+            />
+        </div>
+
         <input type='submit' value='Submit' />
 
     </form>

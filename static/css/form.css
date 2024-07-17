@@ -4,6 +4,9 @@
     padding: 20px;
     max-width: 50%;
     margin: auto;
+    background-image: url('/static/images/book.jpg'); 
+    background-size: cover;
+    
  }
 
  .post-form input[type=text], input[type=number] {
@@ -22,23 +25,87 @@
   }
 
  .post-form input[type=submit] {
-    width: 100%;
-    background-color: #4CAF50;
+    width: 80%;
+    background-color: #be6246;
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    font-weight: bold;
+    font-size: medium;
+    text-align: center;
+    margin-top: 20px;   
+    margin-left: 100px;
+    
  }
 
  .post-form input[type=submit]:hover {
-    background-color: #45a049;
+    width: 50%;
+    background-color: #355737;
+  }
+
+  .post-form input[type=text], input[type=number] {
+    margin-bottom: 10px; 
   }
 
  .form-cat, .form-tag {
     margin-top: 10px;
  }
 
+ main{
+   color: white;
+ }
 
+ select:not(:-internal-list-box) {
+   width: 100%;
+ }
+ 
+label {
+   margin-top: 10px;
+   display: block; /* Ensure labels are displayed as blocks */
+   margin-bottom: 10px; /* Adjust spacing between labels and select */
+}
 
+select {
+   margin-top: 5px; /* Adjust spacing between label and select */
+}
+
+select option {
+   line-height: 1.5; /* Adjust line height as needed */
+}
+
+ 
+/* main.css */
+
+body {
+   position: relative;
+   margin: 0;
+   padding: 0;
+   overflow: hidden; /* Prevent body scroll */
+}
+
+body::before {
+   content: "";
+   position: fixed; /* Fixed position to cover the viewport */
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background-image: url('/static/images/blur.jpg');
+   background-size: cover;
+   background-position: center;
+   filter: blur(10px); /* Adjust the blur level as needed */
+   z-index: -1; /* Ensure it is behind the content */
+   transform: scale(1.1); /* Optional: Scale up to prevent edges from showing */
+   pointer-events: none; /* Allow clicks to go through to the content */
+}
+
+.container {
+   position: relative;
+   z-index: 1;
+   overflow-y: auto; /* Enable vertical scroll if needed */
+   max-height: 100vh; /* Limit container height to viewport height */
+   padding: 20px; /* Add padding to avoid content being covered by pseudo-element */
+}

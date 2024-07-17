@@ -4,11 +4,11 @@
 
 {% block stylesheet %}
     {{block.super}}
-    <link rel='stylesheet' href="{% static 'css/form.css' %}" />
+    <link rel='stylesheet' type="text/css" href="{% static 'css/form.css' %}" />
 {% endblock stylesheet %}
 
 {% block content %}
-<h1>Share your boook</h1>
+<h1>Share your book</h1>
 <div class='post-form'>
     <form method='post'>
         {% csrf_token %}
