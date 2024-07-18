@@ -33,6 +33,7 @@ class PostBookForm(forms.Form):
     )
 
     description = forms.CharField(
+        required=False,
         widget = forms.Textarea(
             attrs={
                 "class":"description-input",

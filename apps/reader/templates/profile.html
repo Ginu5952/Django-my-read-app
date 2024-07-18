@@ -1,0 +1,12 @@
+
+{% extends "base.html" %} <!-- Inherit from base.html -->
+{% load static %}
+{% block title %}{{ block.super }} - Profile{% endblock title %} 
+
+
+{% block content %}
+
+<h1 class='head'>Welcome {{request.user.username}}</h1>
+
+  
+{% endblock content %}

@@ -27,7 +27,7 @@ def book_post(request):
     # get our form in the 2 states
     # pre-submit - GET
     # post-submit - POST
-   # ipdb.set_trace()
+   
     if request.method == 'GET':
         form = PostBookForm()
         context = {"form":form}
