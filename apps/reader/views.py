@@ -39,5 +39,5 @@ def login_view(request):
 
 
 def profile(request):
-    breakpoint()
+  
     return render(request, 'profile.html')

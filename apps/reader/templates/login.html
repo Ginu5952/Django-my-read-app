@@ -1,12 +1,13 @@
-
-{% extends "base.html" %} <!-- Inherit from base.html -->
+{% extends "base.html" %}
 {% load static %}
-{% block title %}{{ block.super }} - Login{% endblock title %} 
+
+{% block title %}{{block.super}} - Login{% endblock title %}
 
 {% block stylesheet %}
-    {{ block.super }}
-    <link rel='stylesheet' type='text/css' href="{%static 'css/form.css' %}" />
+    {{block.super}} 
+    <link rel='stylesheet' type='text/css' href="{% static 'css/form.css' %}" />
 {% endblock stylesheet %}
+
 
 {% block content %}
 
@@ -15,15 +16,16 @@
 <div class='post-form'>
     <div class='login-error'>
         {% if error_message %}
-            <p>{{error_message}}
-        {% endif %}     
-    </div>    
-    
+            <p>{{ error_message }}
+        {% endif %}
+    </div>
+
     <form method='post'>
         {% csrf_token %}
-        {{form}}
+        {{ form }}
         <input type='submit' value='Submit' />
-    </form>    
+    </form>
 
-</div>     
+</div>
+
 {% endblock content %}

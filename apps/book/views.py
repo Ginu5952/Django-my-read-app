@@ -1,46 +1,69 @@
-from django.shortcuts import render,redirect
-from . import models
+from django.shortcuts import render
 from django.http import HttpResponse
-import ipdb
+from django.shortcuts import redirect
+from . import models 
 from .forms import PostBookForm
-from apps.book.models import Book
 
 # Create your views here.
-
-def book_detail(request,isbn):
-
+def book_detail(request, isbn):
     book = models.Book.objects.get(pk=isbn)
+
+    # Set the max viewed book
+    max_viewed_books: int = 5
+
+    # Get the current stored session
+    viewed_books: list = request.session.get('viewed_books', [])
+
+    # Create the data to be stored in the session
+    viewed_book: list[str] = [book.isbn, book.title]
+
+    # Remove if it exist already
+    if viewed_book in viewed_books:
+        viewed_books.remove(viewed_book)
+
+    # Insert the viewed book at index 0
+    viewed_books.insert(0, viewed_book)
+
+    # Get the limit
+    viewed_books = viewed_books[:max_viewed_books]
+
+    # replace in the session
+    request.session['viewed_books'] = viewed_books
 
     context = {
         "book": book,
-        
+
     }
- 
-    return render(request, 'book_detail.html',context)     
+    return render(request, 'book_detail.html', context)
 
-
-#def book_post(request):
-    #ipdb.set_trace()
-  #  return render(request,'post.html')    
+# def book_post(request):
+#     #breakpoint()
+#     return render(request, 'post.html')
 
 def book_post(request):
-    # get our form in the 2 states
-    # pre-submit - GET
-    # post-submit - POST
-   
+    # Get our form in the two states.
+    # - pre-submit
+    #    - http method: `GET`
+    # - post-submit
+    #    -- http method: `POST`
+
+    #breakpoint()
     if request.method == 'GET':
+        # pre-submit
         form = PostBookForm()
-        context = {"form":form}
+        context = {"form": form}
+
         return render(
             request,
             'book_post.html',
-            context 
+            context
         )
     elif request.method == 'POST':
+        # post-submit
         data = request.POST
         form = PostBookForm(data)
 
-         # Validation
+        # Validation
         if form.is_valid():
             data = form.cleaned_data
             # TODO: Save to database
@@ -62,5 +85,5 @@ def book_post(request):
             book.tags.set(data['tags'])
             book.save()
 
-            #  Redirect to home page using `app-name: url-name`
+            # TODO: Redirect to home page using `app-name: url-name`
             return redirect('myread-urls:home-page')
